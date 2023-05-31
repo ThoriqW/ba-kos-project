@@ -9,7 +9,14 @@ export default reactive({
 
   //toggle modal login
   toggleModal() {
+    const body = document.querySelector("body");
     document.getElementById("modal").classList.toggle("hidden");
-    console.log("tes");
+    if (!document.getElementById("modal").classList.contains("hidden")) {
+      // Disable scroll
+      body.style.overflow = "hidden";
+    } else {
+      // Enable scroll
+      body.style.overflow = "auto";
+    }
   },
 });

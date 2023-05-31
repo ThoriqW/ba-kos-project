@@ -5,7 +5,7 @@
   >
     <div class="flex justify-center h-[120px] sm:h-[200px]">
       <img
-        class=""
+        class="object-cover"
         :src="require(`../assets/image/${imgURL}`)"
         alt="image-kos"
         loading="lazy"

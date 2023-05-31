@@ -1,6 +1,6 @@
 <template>
-  <nav class="bg-secondary-color p-4">
-    <div class="container max-w-screen-xl mx-auto px-5 text-sm">
+  <nav class="bg-secondary-color">
+    <div class="container max-w-screen-xl mx-auto px-5 p-4 text-sm">
       <ol class="list-none flex">
         <li v-for="(crumb, index) in crumbs" :key="index">
           <a
