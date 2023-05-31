@@ -79,14 +79,14 @@
           <div class="flex flex-col mt-3">
             <h1 class="text-xl font-medium mb-3">Spesifikasi Kos</h1>
             <div class="flex flex-colo">
-              <div class="flex text-sm items-center mr-5">
+              <div class="flex text-sm items-center mr-5 w-36">
                 <font-awesome-icon
                   class="mr-2"
                   icon="fa-solid fa-square-parking"
                 />
                 <p>{{ kos.spesifikasi[0] }}</p>
               </div>
-              <div class="flex text-sm items-center">
+              <div class="flex text-sm items-center w-36">
                 <font-awesome-icon class="mr-2" icon="fa-solid fa-bolt" />
                 <p>{{ kos.spesifikasi[1] }}</p>
               </div>
@@ -98,35 +98,35 @@
           <div class="flex flex-col mt-3">
             <h1 class="text-xl font-medium mb-3">Fasilitas Kos</h1>
             <div class="flex flex-colo">
-              <div class="flex text-sm items-center mr-5 mb-5">
+              <div class="flex text-sm items-center mr-5 mb-5 sm:w-36">
                 <font-awesome-icon
                   class="mr-2"
                   icon="fa-solid fa-square-parking"
                 />
                 <p>{{ kos.fasilitas[0] }}</p>
               </div>
-              <div class="flex text-sm items-center mr-5 mb-5">
+              <div class="flex text-sm items-center mr-5 mb-5 sm:w-36">
                 <font-awesome-icon class="mr-2" icon="fa-solid fa-bolt" />
                 <p>{{ kos.fasilitas[1] }}</p>
               </div>
-              <div class="flex text-sm items-center mr-5 mb-5">
+              <div class="flex text-sm items-center mr-5 mb-5 sm:w-36">
                 <font-awesome-icon class="mr-2" icon="fa-solid fa-bolt" />
                 <p>{{ kos.fasilitas[2] }}</p>
               </div>
             </div>
             <div class="flex flex-colo">
-              <div class="flex text-sm items-center mr-5 mb-5">
+              <div class="flex text-sm items-center mr-5 mb-5 sm:w-36">
                 <font-awesome-icon
                   class="mr-2"
                   icon="fa-solid fa-square-parking"
                 />
                 <p>{{ kos.fasilitas[3] }}</p>
               </div>
-              <div class="flex text-sm items-center mr-5 mb-5">
+              <div class="flex text-sm items-center mr-5 mb-5 sm:w-36">
                 <font-awesome-icon class="mr-2" icon="fa-solid fa-bolt" />
                 <p>{{ kos.fasilitas[4] }}</p>
               </div>
-              <div class="flex text-sm items-center mr-5 mb-5">
+              <div class="flex text-sm items-center mr-5 mb-5 sm:w-36">
                 <font-awesome-icon class="mr-2" icon="fa-solid fa-bolt" />
                 <p>{{ kos.fasilitas[5] }}</p>
               </div>
@@ -135,7 +135,7 @@
         </div>
 
         <!-- Harga Info -->
-        <div class="flex-auto">
+        <div class="flex-auto lg:block hidden">
           <div class="shadow-lg">
             <div class="flex-flex-col">
               <div class="flex flex-col p-3">
@@ -171,6 +171,28 @@
       <WhyChooseUsSection></WhyChooseUsSection>
     </section>
     <hr class="w-full border-b-2 border-secondary-color" />
+  </div>
+
+  <div
+    v-if="kos"
+    class="w-full text-sm bg-primary-color shadow-lg fixed bottom-0 lg:hidden block p-2"
+  >
+    <div>
+      <div class="flex flex-col p-3">
+        <p class="text-xs">MULAI</p>
+        <p class="font-Lato text-lg">{{ kos.harga }} <span> / Bulan</span></p>
+      </div>
+    </div>
+    <div class="flex p-2">
+      <div class="flex flex-auto p-3 items-center bg-secondary-color m-1">
+        <font-awesome-icon icon="fa-brands fa-facebook" class="mr-3" />
+        <p>Hubungi Pemiliki</p>
+      </div>
+      <div class="flex flex-auto p-3 items-center bg-button-color m-1">
+        <font-awesome-icon icon="fa-solid fa-heart" class="mr-3" />
+        <p>Simpan</p>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->

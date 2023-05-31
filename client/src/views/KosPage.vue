@@ -1,4 +1,5 @@
 <template>
+  <ModalLogin></ModalLogin>
   <NavigationBar></NavigationBar>
   <Breedcrumb :crumbs="crumbs"></Breedcrumb>
   <HeaderKosPage></HeaderKosPage>
@@ -22,18 +23,18 @@
       </div>
       <div class="flex justify-center mt-3">
         <button
-          class="btn m-2 py-2 px-4 text-primary-color bg-button-color"
+          class="btn m-3 mt-4 text-black-color"
           @click="previousPage"
           :disabled="currentPage === 1"
         >
-          <font-awesome-icon icon="fa-solid fa-angles-left" />
+          <font-awesome-icon class="text-xl" icon="fa-solid fa-angles-left" />
         </button>
         <button
-          class="btn m-2 py-2 px-4 text-primary-color bg-button-color"
+          class="btn m-3 mt-4 text-black-color"
           @click="nextPage"
           :disabled="currentPage === totalPages"
         >
-          <font-awesome-icon icon="fa-solid fa-angles-right" />
+          <font-awesome-icon class="text-xl" icon="fa-solid fa-angles-right" />
         </button>
       </div>
     </section>
@@ -50,6 +51,7 @@ import KosCard from "@/components/KosCard.vue";
 import HeaderKosPage from "@/components/HeaderKosPage.vue";
 import Footer from "@/components/Footer.vue";
 import Breedcrumb from "@/components/Breedcrumb.vue";
+import ModalLogin from "@/components/ModalLogin.vue";
 
 import store from "@/store/store";
 
@@ -61,6 +63,7 @@ export default {
     KosCard,
     Footer,
     Breedcrumb,
+    ModalLogin,
   },
   data() {
     return {
