@@ -4,7 +4,7 @@
       class="container max-w-screen-xl mx-auto px-5 sm:flex sm:justify-between sm:items-center py-2"
     >
       <div class="flex justify-between py-2">
-        <h1 class="text-lg font-bold">
+        <h1 class="text-lg font-bold flex items-center mr-10">
           Ba-Kos <span class="text-button-color">Palu</span>
         </h1>
         <div class="flex sm:hidden">
@@ -30,6 +30,21 @@
             </svg>
           </button>
         </div>
+      </div>
+      <div
+        class="relative flex items-center border border-secondary-color hidden lg:block"
+        id="dynamic-navbar"
+      >
+        <input
+          class="text-sm p-2 focus:outline-none sm:w-[350px]"
+          type="text"
+          placeholder="Masukan nama lokasi"
+        />
+        <button
+          class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
+        >
+          Cari
+        </button>
       </div>
       <div
         :class="{
@@ -77,7 +92,13 @@ export default {
     return {
       isOpen: false,
       store,
+      url: this.$router.currentRoute.value.fullPath,
     };
+  },
+  mounted() {
+    if (this.url === "/") {
+      document.getElementById("dynamic-navbar").classList.toggle("lg:block");
+    }
   },
 };
 </script>
