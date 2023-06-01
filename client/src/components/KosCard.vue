@@ -6,7 +6,7 @@
     <div class="flex justify-center h-[120px] sm:h-[200px]">
       <img
         class="object-cover"
-        :src="require(`../assets/image/${imgURL}`)"
+        :src="require(`@/assets/image/${imgURL}`)"
         alt="image-kos"
         loading="lazy"
         fetchpriority="high"
@@ -65,6 +65,7 @@ export default {
     harga: String,
     kec: String,
     kosId: String,
+    urlImage: String,
   },
 };
 </script>

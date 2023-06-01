@@ -56,7 +56,7 @@ import ModalLogin from "@/components/ModalLogin.vue";
 import store from "@/store/store";
 
 export default {
-  name: "DaftarKos",
+  name: "KosView",
   components: {
     NavigationBar,
     HeaderKosPage,
