@@ -49,7 +49,11 @@
         <div class="text-sm">
           <p>
             Belum punya akun?
-            <a class="text-button-color cursor-pointer">Daftar Sekarang.</a>
+            <router-link
+              to="/daftar-user"
+              class="text-button-color cursor-pointer"
+              >Daftar Sekarang.</router-link
+            >
           </p>
         </div>
       </div>

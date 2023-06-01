@@ -7,7 +7,7 @@
         <div class="md:flex md:w-[850px] md:mr-3">
           <img
             class="object-cover w-full"
-            :src="require(`../assets/image/${kos.img}`)"
+            :src="require(`../../assets/image/${kos.img}`)"
             alt=""
           />
         </div>
@@ -15,14 +15,14 @@
           <div class="h-1/2 flex">
             <img
               class="object-cover w-full mb-3"
-              :src="require(`../assets/image/${kos.img}`)"
+              :src="require(`../../assets/image/${kos.img}`)"
               alt=""
             />
           </div>
           <div class="h-1/2 flex">
             <img
               class="object-cover w-full"
-              :src="require(`../assets/image/${kos.img}`)"
+              :src="require(`../../assets/image/${kos.img}`)"
               alt=""
             />
           </div>

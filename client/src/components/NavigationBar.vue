@@ -4,9 +4,9 @@
       class="container max-w-screen-xl mx-auto px-5 sm:flex sm:justify-between sm:items-center py-2"
     >
       <div class="flex justify-between py-2">
-        <h1 class="text-lg font-bold flex items-center mr-10">
+        <router-link to="/" class="text-lg font-bold flex items-center mr-10">
           Ba-Kos <span class="text-button-color">Palu</span>
-        </h1>
+        </router-link>
         <div class="flex sm:hidden">
           <button
             @click="isOpen = !isOpen"

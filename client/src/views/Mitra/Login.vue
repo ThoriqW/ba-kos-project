@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="h-screen flex items-center justify-center bg-secondary-color"
-  >
+  <div class="h-screen flex items-center justify-center bg-secondary-color">
     <div class="">
       <div class="text-center font-bold mb-3">
         <h1 class="text-2xl">
@@ -29,7 +27,11 @@
         <div class="text-sm">
           <p>
             Belum punya akun?
-            <a class="text-button-color cursor-pointer">Daftar Sekarang.</a>
+            <router-link
+              to="/daftar-mitra"
+              class="text-button-color cursor-pointer"
+              >Daftar Sekarang.
+            </router-link>
           </p>
         </div>
       </div>
