@@ -11,4 +11,11 @@ export default reactive({
   toggleModal() {
     document.getElementById("modal").classList.toggle("hidden");
   },
+
+  formUserRegistration: {
+    name: "",
+    phone_number: "",
+    email: "",
+    password: "",
+  },
 });
