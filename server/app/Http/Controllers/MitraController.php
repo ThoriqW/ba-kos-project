@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class MitraController extends Controller
 {
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         // Validasi input dari request
         $request->validate([

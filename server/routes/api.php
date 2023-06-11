@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\Api\V1\SkillController;
 
 /*
@@ -23,9 +24,15 @@ Route::group(['prefix' => 'v1'], function () {
     Route::apiResource('skills', SkillController::class);
 });
 
-Route::post('/users', [UserController::class, 'create']);
+// Route::post('/users', [UserController::class, 'create']);
 
-Route::post('/mitras', [MitraController::class, 'create']);
+// Route::post('/mitras', [MitraController::class, 'create']);
+
+Route::apiResource('users', UserController::class)->except(['create', 'edit', 'update']);
+
+Route::apiResource('mitras', MitraController::class)->except(['create', 'edit', 'update']);
+
+Route::apiResource('user-profiles', UserProfileController::class)->except(['create', 'edit', 'update']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
