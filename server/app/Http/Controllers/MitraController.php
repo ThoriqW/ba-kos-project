@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 class MitraController extends Controller
 {
 
+    public function index()
+    {
+        $user = User::all();
+        return response()->json($user);
+    }
+
     public function store(Request $request)
     {
         // Validasi input dari request
@@ -15,7 +21,7 @@ class MitraController extends Controller
             'name' => 'required|min:3|max:255',
             'email' => 'required|email:dns|unique:users',
             'phone_number' => 'required|unique:users|regex:/^08\d{8,}$/i',
-            'password' => 'required|min:8|confirmed'
+            'password' => 'required|min:8'
         ]);
 
         // Membuat objek User baru
