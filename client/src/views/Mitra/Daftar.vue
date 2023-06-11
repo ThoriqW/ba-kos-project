@@ -16,6 +16,11 @@
               class="w-full p-2 mt-2"
               type="text"
             />
+            <div v-if="error">
+              <p v-if="error.name" class="text-red-500 text-xs italic mt-1">
+                {{ error.name[0] }}
+              </p>
+            </div>
           </div>
           <div class="my-3">
             <label class="text-sm" for="phone_number">Nomor Handphone</label>
@@ -25,6 +30,14 @@
               id="phone_number"
               type="text"
             />
+            <div v-if="error">
+              <p
+                v-if="error.phone_number"
+                class="text-red-500 text-xs italic mt-1"
+              >
+                {{ error.phone_number[0] }}
+              </p>
+            </div>
           </div>
           <div class="my-3">
             <label class="text-sm" for="number">Email</label>
@@ -34,6 +47,11 @@
               id="email"
               type="text"
             />
+            <div v-if="error">
+              <p v-if="error.email" class="text-red-500 text-xs italic mt-1">
+                {{ error.email[0] }}
+              </p>
+            </div>
           </div>
           <div class="my-3">
             <label class="text-sm" for="password">Password</label>
@@ -43,9 +61,16 @@
               id="password"
               type="text"
             />
+            <div v-if="error">
+              <p v-if="error.password" class="text-red-500 text-xs italic mt-1">
+                {{ error.password[0] }}
+              </p>
+            </div>
           </div>
           <div class="my-3">
-            <label class="text-sm" for="ulangi-password">Ulangi Password</label>
+            <label class="text-sm" for="password_confirmation"
+              >Ulangi Password</label
+            >
             <input class="w-full p-2 mt-2" type="text" id="ulangi-password" />
           </div>
           <button
@@ -71,6 +96,7 @@ export default {
     return {
       store,
       router: useRouter(),
+      error: null,
     };
   },
   methods: {
@@ -80,7 +106,7 @@ export default {
         await this.router.push({ name: "LoginMitra" });
       } catch (error) {
         if (error.response.status === 422) {
-          error.value = error.response.data.errors;
+          this.error = error.response.data.errors;
         }
       }
     },
