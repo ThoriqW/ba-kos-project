@@ -81,6 +81,7 @@ export default {
       } catch (error) {
         if (error.response.status === 422) {
           error.value = error.response.data.errors;
+          console.log(store.formUserRegistration);
         }
       }
     },

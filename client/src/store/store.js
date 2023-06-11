@@ -18,4 +18,11 @@ export default reactive({
     email: "",
     password: "",
   },
+
+  formMitraRegistration: {
+    name: "",
+    phone_number: "",
+    email: "",
+    password: "",
+  },
 });
