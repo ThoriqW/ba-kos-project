@@ -12,10 +12,10 @@ class UserController extends Controller
     {
         // Validasi input dari request
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'phone_number' => 'required|unique:users',
-            'password' => 'required|min:6',
+            'name' => 'required|min:3|max:255',
+            'email' => 'required|email:dns|unique:users',
+            'phone_number' => 'required|unique:users|regex:/^08\d{8,}$/i',
+            'password' => 'required|min:8|confirmed'
         ]);
 
         // Membuat objek User baru
