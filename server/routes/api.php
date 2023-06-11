@@ -32,6 +32,8 @@ Route::apiResource('users', UserController::class)->except(['create', 'edit', 'u
 
 Route::apiResource('mitras', MitraController::class)->except(['create', 'edit', 'update']);
 
+// Route::post('/user-profiles', [UserProfileController::class, 'store']);
+
 Route::apiResource('user-profiles', UserProfileController::class)->except(['create', 'edit', 'update']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

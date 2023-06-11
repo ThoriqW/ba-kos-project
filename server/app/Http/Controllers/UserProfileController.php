@@ -23,7 +23,7 @@ class UserProfileController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'profile_photo' => 'nullable|image',
+            'profile_photo' => 'nullable',
             'gender' => 'nullable',
             'birthdate' => 'nullable|date',
             'city' => 'nullable',

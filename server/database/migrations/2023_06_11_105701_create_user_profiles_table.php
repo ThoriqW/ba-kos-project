@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('profile_photo')->nullable();
             $table->string('gender')->nullable();
             $table->string('birthdate')->nullable();
@@ -21,8 +22,6 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('job')->nullable();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
