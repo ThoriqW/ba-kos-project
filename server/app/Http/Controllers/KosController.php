@@ -40,4 +40,35 @@ class KosController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function update(Request $request, Kos $kos)
+    {
+        try {
+            $request->validate([
+                'kos_name' => 'nullable|string',
+                'kos_type' => 'nullable|string',
+                'kos_description' => 'nullable|string',
+                'kos_rule' => 'nullable|string',
+                'kos_note' => 'nullable|string',
+                'kos_address' => 'nullable|string'
+            ]);
+
+            $kos->update($request->all());
+            return response()->json($kos);
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function destroy(Kos $kos)
+    {
+        try {
+            $kos->delete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

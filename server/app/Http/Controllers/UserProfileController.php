@@ -42,22 +42,32 @@ class UserProfileController extends Controller
 
     public function update(Request $request, UserProfile $userProfile)
     {
-        $request->validate([
-            'profile_photo' => 'nullable|image',
-            'gender' => 'nullable',
-            'birthdate' => 'nullable|date',
-            'city' => 'nullable',
-            'status' => 'nullable',
-            'job' => 'nullable',
-        ]);
+        try {
+            $request->validate([
+                'profile_photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+                'gender' => 'nullable|string',
+                'birthdate' => 'nullable|date',
+                'city' => 'nullable|string',
+                'status' => 'nullable|string',
+                'job' => 'nullable|string'
+            ]);
 
-        $userProfile->update($request->all());
-        return response()->json($userProfile);
+            $userProfile->update($request->all());
+            return response()->json($userProfile);
+        } catch (\Exception $e) {
+            // Handle the error
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     public function destroy(UserProfile $userProfile)
     {
-        $userProfile->delete();
-        return response()->json(null, 204);
+        try {
+            $userProfile->delete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Handle the error
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

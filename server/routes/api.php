@@ -21,11 +21,11 @@ use App\Http\Controllers\KosPhotoController;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('users', UserController::class)->except(['create', 'edit', 'update']);
-    Route::apiResource('mitras', MitraController::class)->except(['create', 'edit', 'update']);
-    Route::apiResource('user-profiles', UserProfileController::class)->except(['create', 'edit', 'update']);
-    Route::apiResource('kos', KosController::class)->except(['create', 'edit', 'update']);
-    Route::apiResource('kos-photo', KosPhotoController::class)->except(['create', 'edit', 'update']);
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('mitras', MitraController::class);
+    Route::apiResource('user-profiles', UserProfileController::class);
+    Route::apiResource('kos', KosController::class);
+    Route::apiResource('kos-photo', KosPhotoController::class);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

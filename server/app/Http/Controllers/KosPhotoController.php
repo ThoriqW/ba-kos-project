@@ -39,4 +39,36 @@ class KosPhotoController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function update(Request $request, KosPhoto $kosPhoto)
+    {
+        try {
+            $request->validate([
+                'front_photos' => 'nullable|images',
+                'interior_photos' => 'nullable|images',
+                'street_photos' => 'nullable|images',
+                'front_room_photos' => 'nullable|images',
+                'interior_room_photos' => 'nullable|images',
+                'bath_room_photos' => 'nullable|images',
+                'additional_room_photos' => 'nullable|images'
+            ]);
+
+            $kosPhoto->update($request->all());
+            return response()->json($kosPhoto);
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function destroy(KosPhoto $kosPhoto)
+    {
+        try {
+            $kosPhoto->delete();
+            return response()->json(null, 204);
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
