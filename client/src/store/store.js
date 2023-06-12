@@ -25,4 +25,14 @@ export default reactive({
     email: "",
     password: "",
   },
+
+  formUserProfile: {
+    user_id: 2,
+    profile_photo: "",
+    gender: [],
+    birthdate: "",
+    city: "",
+    status: "",
+    job: [],
+  },
 });

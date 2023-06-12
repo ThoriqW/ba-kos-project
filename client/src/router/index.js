@@ -8,6 +8,7 @@ import UserKosSayaView from "@/views/User/UserKosSayaView.vue";
 import UserBookingView from "@/views/User/UserBookingView.vue";
 import DaftarMitra from "@/views/Mitra/Daftar.vue";
 import DaftarUser from "@/views/User/Daftar.vue";
+import EditProfileView from "@/views/User/EditProfileView.vue";
 
 const routes = [
   {
@@ -47,13 +48,18 @@ const routes = [
   },
   {
     path: "/user/kos-saya",
-    name: "UserKosSayaPage",
+    name: "UserKosSayaView",
     component: UserKosSayaView,
   },
   {
     path: "/user/booking",
-    name: "UserBookingPage",
+    name: "UserBookingView",
     component: UserBookingView,
+  },
+  {
+    path: "/user/edit-profile",
+    name: "EditProfileView",
+    component: EditProfileView,
   },
 ];
 

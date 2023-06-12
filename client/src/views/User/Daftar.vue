@@ -15,6 +15,7 @@
               id="name"
               class="w-full p-2 mt-2"
               type="text"
+              required
             />
             <div v-if="error">
               <p v-if="error.name" class="text-red-500 text-xs italic mt-1">
@@ -29,6 +30,7 @@
               class="w-full p-2 mt-2"
               id="phone_number"
               type="text"
+              required
             />
             <div v-if="error">
               <p
@@ -46,6 +48,7 @@
               class="w-full p-2 mt-2"
               id="email"
               type="text"
+              required
             />
             <div v-if="error">
               <p v-if="error.email" class="text-red-500 text-xs italic mt-1">
@@ -60,6 +63,7 @@
               class="w-full p-2 mt-2"
               id="password"
               type="text"
+              required
             />
             <div v-if="error">
               <p v-if="error.password" class="text-red-500 text-xs italic mt-1">
@@ -102,7 +106,7 @@ export default {
   methods: {
     async createUser(data) {
       try {
-        await axios.post("http://127.0.0.1:8000/api/users", data);
+        await axios.post("http://127.0.0.1:8000/api/v1/users", data);
         await this.router.push({ name: "LoginUser" });
       } catch (error) {
         if (error.response.status === 422) {

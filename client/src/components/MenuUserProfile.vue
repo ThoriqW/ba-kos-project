@@ -16,11 +16,12 @@
         <div>
           <h1 class="font-bold text-xl">Moh Thoriq Wajedi</h1>
         </div>
-        <button
+        <router-link
+          to="/user/edit-profile"
           class="btn px-3 py-2 bg-button-color text-primary-color sm:text-sm text-xs mt-2"
         >
           Edit Profile
-        </button>
+        </router-link>
       </div>
     </div>
     <div class="p-4 font-medium text-gray-color">

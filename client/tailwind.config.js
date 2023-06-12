@@ -12,6 +12,7 @@ module.exports = {
         "button-color": "#25DFC6",
         "black-color": "#252525",
         "gray-color": "#949494",
+        "cancel-color": "#f42",
       },
     },
   },
