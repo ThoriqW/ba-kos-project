@@ -7,59 +7,36 @@ use Illuminate\Http\Request;
 
 class KosPhotoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $kosPhoto = KosPhoto::all();
+        return response()->json($kosPhoto);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(KosPhoto $kosPhoto)
     {
-        //
+        return response()->json($kosPhoto);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(KosPhoto $kosPhoto)
+    public function store(Request $request)
     {
-        //
-    }
+        try {
+            $request->validate([
+                'kos_id' => 'required|exists:kos,id',
+                'front_photos' => 'nullable|images',
+                'interior_photos' => 'nullable|images',
+                'street_photos' => 'nullable|images',
+                'front_room_photos' => 'nullable|images',
+                'interior_room_photos' => 'nullable|images',
+                'bath_room_photos' => 'nullable|images',
+                'additional_room_photos' => 'nullable|images'
+            ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, KosPhoto $kosPhoto)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(KosPhoto $kosPhoto)
-    {
-        //
+            $kosPhoto = KosPhoto::create($request->all());
+            return response()->json($kosPhoto, 201);
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

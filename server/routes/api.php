@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\Api\V1\SkillController;
 use App\Http\Controllers\KosController;
+use App\Http\Controllers\KosPhotoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,25 +20,14 @@ use App\Http\Controllers\KosController;
 |
 */
 
-Route::group(['prefix' => 'v1'], function () {
-
-    Route::apiResource('skills', SkillController::class);
+Route::prefix('v1')->group(function () {
+    Route::apiResource('users', UserController::class)->except(['create', 'edit', 'update']);
+    Route::apiResource('mitras', MitraController::class)->except(['create', 'edit', 'update']);
+    Route::apiResource('user-profiles', UserProfileController::class)->except(['create', 'edit', 'update']);
+    Route::apiResource('kos', KosController::class)->except(['create', 'edit', 'update']);
+    Route::apiResource('kos-photo', KosPhotoController::class)->except(['create', 'edit', 'update']);
 });
 
-// Route::post('/users', [UserController::class, 'create']);
-
-// Route::post('/mitras', [MitraController::class, 'create']);
-
-Route::apiResource('users', UserController::class)->except(['create', 'edit', 'update']);
-
-Route::apiResource('mitras', MitraController::class)->except(['create', 'edit', 'update']);
-
-// Route::post('/user-profiles', [UserProfileController::class, 'store']);
-
-Route::apiResource('user-profiles', UserProfileController::class)->except(['create', 'edit', 'update']);
-
-Route::apiResource('kos', KosController::class)->except(['create', 'edit', 'update']);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

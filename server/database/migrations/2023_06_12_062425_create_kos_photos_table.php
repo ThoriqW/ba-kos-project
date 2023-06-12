@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('kos_photos', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('kos_id')->unique();
-            // $table->foreign('kos_id')->references('id')->on('koss')->onDelete('cascade');
+            $table->unsignedBigInteger('kos_id')->unique();
+            $table->foreign('kos_id')->references('id')->on('kos')->onDelete('cascade');
             $table->string('front_photos')->nullable();
             $table->string('interior_photos')->nullable();
             $table->string('street_photos')->nullable();
             $table->string('front_room_photos')->nullable();
             $table->string('interior_room_photos')->nullable();
-            $table->string('bathroom_photos')->nullable();
+            $table->string('bath_room_photos')->nullable();
             $table->string('additional_room_photos')->nullable();
             $table->timestamps();
         });

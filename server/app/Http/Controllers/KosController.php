@@ -22,17 +22,22 @@ class KosController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'kos_name' => 'nullable|string',
-            'kos_type' => 'nullable|string',
-            'kos_description' => 'nullable|string',
-            'kos_rule' => 'nullable|string',
-            'kos_note' => 'nullable|string',
-            'kos_address' => 'nullable|string'
-        ]);
+        try {
+            $request->validate([
+                'user_id' => 'required|exists:users,id',
+                'kos_name' => 'nullable|string',
+                'kos_type' => 'nullable|string',
+                'kos_description' => 'nullable|string',
+                'kos_rule' => 'nullable|string',
+                'kos_note' => 'nullable|string',
+                'kos_address' => 'nullable|string'
+            ]);
 
-        $kos = Kos::create($request->all());
-        return response()->json($kos, 201);
+            $kos = Kos::create($request->all());
+            return response()->json($kos, 201);
+        } catch (\Exception $e) {
+            // Tangani kesalahan
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }
