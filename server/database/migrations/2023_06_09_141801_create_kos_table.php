@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('kos', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('alamat');
+            $table->unsignedBigInteger('user_id')->unique();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('kos_name');
+            $table->string('kos_type');
+            $table->string('kos_description');
+            $table->string('kos_rule');
+            $table->string('kos_note');
+            $table->string('kos_address');
             $table->timestamps();
         });
     }

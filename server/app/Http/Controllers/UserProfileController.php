@@ -23,12 +23,12 @@ class UserProfileController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'profile_photo' => 'nullable',
-            'gender' => 'nullable',
+            'profile_photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'gender' => 'nullable|string',
             'birthdate' => 'nullable|date',
-            'city' => 'nullable',
-            'status' => 'nullable',
-            'job' => 'nullable',
+            'city' => 'nullable|string',
+            'status' => 'nullable|string',
+            'job' => 'nullable|string'
         ]);
 
         $userProfile = UserProfile::create($request->all());

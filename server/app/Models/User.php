@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function kos()
+    {
+        return $this->hasOne(Kos::class);
+    }
 }
