@@ -7,17 +7,30 @@
         </h1>
       </div>
       <div class="border border-secondary-color shadow-lg p-5">
-        <form action="">
+        <form @submit.prevent="loginUser(store.formLoginUser)">
           <div class="my-3">
             <label class="text-sm" for="number">Nomor Handphone</label>
-            <input class="w-full p-2 mt-2" type="text" />
+            <input
+              v-model="store.formLoginUser.email"
+              class="w-full p-2 mt-2"
+              type="text"
+              id="number"
+              required
+            />
           </div>
           <div class="my-3">
             <label class="text-sm" for="password">Password</label>
-            <input class="w-full p-2 mt-2" type="text" />
+            <input
+              v-model="store.formLoginUser.password"
+              class="w-full p-2 mt-2"
+              type="text"
+              id="password"
+              required
+            />
           </div>
           <button
             class="w-full bg-button-color btn py-2 text-secondary-color my-3"
+            type="submit"
           >
             Masuk
           </button>
@@ -62,8 +75,39 @@
 </template>
 
 <script>
+import store from "@/store/store";
+import axios from "axios";
+import { useRouter } from "vue-router";
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "LoginUser",
+  data() {
+    return {
+      store,
+      error: null,
+      router: useRouter(),
+    };
+  },
+  methods: {
+    async loginUser(data) {
+      try {
+        await axios
+          .post("http://127.0.0.1:8000/api/v1/auth/users/login", data)
+          .then((response) => {
+            const token = response.data.token;
+
+            localStorage.setItem("token", token);
+
+            this.router.push({ name: "Home" });
+
+            console.log(response.data.message);
+          });
+      } catch (error) {
+        this.error = error.response.data;
+        console.log(this.error);
+      }
+    },
+  },
 };
 </script>

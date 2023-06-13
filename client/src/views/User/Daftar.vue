@@ -42,7 +42,7 @@
             </div>
           </div>
           <div class="my-3">
-            <label class="text-sm" for="number">Email</label>
+            <label class="text-sm" for="email">Email</label>
             <input
               v-model="store.formUserRegistration.email"
               class="w-full p-2 mt-2"
@@ -75,7 +75,11 @@
             <label class="text-sm" for="password_confirmation"
               >Ulangi Password</label
             >
-            <input class="w-full p-2 mt-2" type="text" id="ulangi-password" />
+            <input
+              class="w-full p-2 mt-2"
+              type="text"
+              id="password_confirmation"
+            />
           </div>
           <button
             class="w-full bg-button-color btn py-2 text-secondary-color my-3"

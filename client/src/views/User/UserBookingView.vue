@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      crumbs: ["Home", "/", "User"],
+      crumbs: [{ name: "Home", url: "/" }, { name: "User" }],
     };
   },
 };

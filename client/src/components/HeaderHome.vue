@@ -13,6 +13,7 @@
           <input
             class="text-sm p-2 focus:outline-none sm:w-[350px]"
             type="text"
+            id="search-location-header"
             placeholder="Masukan nama lokasi"
           />
           <button

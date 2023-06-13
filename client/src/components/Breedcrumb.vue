@@ -11,8 +11,9 @@
             }"
             class="text-gray-color hover:text-gray-800 mr-2 cursor-pointer"
           >
-            {{ crumb }}
+            {{ crumb.name }}
           </a>
+          <span v-if="!isLast(index)" class="mr-2 text-gray-color">/</span>
         </li>
       </ol>
     </div>

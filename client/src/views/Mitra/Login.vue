@@ -10,11 +10,23 @@
         <form action="">
           <div class="my-3">
             <label class="text-sm" for="number">Nomor Handphone</label>
-            <input class="w-full p-2 mt-2" type="text" />
+            <input
+              class="w-full p-2 mt-2"
+              type="text"
+              name="number"
+              id="number"
+              required
+            />
           </div>
           <div class="my-3">
             <label class="text-sm" for="password">Password</label>
-            <input class="w-full p-2 mt-2" type="text" />
+            <input
+              class="w-full p-2 mt-2"
+              type="text"
+              name="password"
+              id="password"
+              required
+            />
           </div>
           <button
             class="w-full bg-button-color btn py-2 text-secondary-color my-3"

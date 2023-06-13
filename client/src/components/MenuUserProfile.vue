@@ -14,7 +14,7 @@
       </div>
       <div class="flex-auto">
         <div>
-          <h1 class="font-bold text-xl">Moh Thoriq Wajedi</h1>
+          <h1 class="font-bold text-xl mb-2">Moh Thoriq Wajedi</h1>
         </div>
         <router-link
           to="/user/edit-profile"

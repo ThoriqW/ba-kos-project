@@ -70,7 +70,7 @@ export default {
       store,
       pageSize: 8, // Number of items per page
       currentPage: 1, // Current page number
-      crumbs: ["Home", "/", "Kos"],
+      crumbs: [{ name: "Home", url: "/" }, { name: "Kos" }],
     };
   },
   computed: {

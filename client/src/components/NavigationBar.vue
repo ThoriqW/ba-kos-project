@@ -37,6 +37,7 @@
       >
         <input
           class="text-sm p-2 focus:outline-none sm:w-[350px]"
+          id="search-location-navbar"
           type="text"
           placeholder="Masukan nama lokasi"
         />
@@ -64,10 +65,19 @@
             <li
               class="my-2 sm:my-0 sm:mr-6 sm:relative sm:after:h-0.5 sm:after:duration-150 sm:after:block sm:after:absolute sm:after:w-0 sm:after:bg-button-color sm:hover:after:w-full"
             >
-              <router-link to="/daftar-kos">Kos</router-link>
+              <router-link to="/kos">Kos</router-link>
             </li>
           </ul>
           <button
+            v-if="store.authenticated.isAuthenticated"
+            type="button"
+            class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
+            @click.prevent="logout"
+          >
+            Keluar
+          </button>
+          <button
+            v-else
             type="button"
             class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
             @click.prevent="store.toggleModal"
@@ -82,6 +92,8 @@
 
 <script>
 import store from "@/store/store";
+import { useRouter } from "vue-router";
+import axios from "axios";
 
 export default {
   name: "NavigationBar",
@@ -93,12 +105,48 @@ export default {
       isOpen: false,
       store,
       url: this.$router.currentRoute.value.fullPath,
+      isAuthenticated: false,
+      router: useRouter(),
     };
   },
   mounted() {
     if (this.url === "/") {
       document.getElementById("dynamic-navbar").classList.toggle("lg:block");
     }
+
+    // Check if the user is already authenticated (e.g., token exists in local storage)
+    if (localStorage.getItem("token")) {
+      this.store.authenticated.isAuthenticated = true;
+      const token = localStorage.getItem("token");
+
+      // Fetch user data
+      axios
+        .get("http://127.0.0.1:8000/api/v1/users", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          this.store.authenticated.user = response.data;
+          console.log(this.store.authenticated.user);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  },
+  methods: {
+    //logout user/mitra
+    logout() {
+      // Clear the token from local storage
+      localStorage.removeItem("token");
+
+      // Update the login status
+      this.store.authenticated.isAuthenticated = false;
+
+      // Redirect to the login page
+      this.router.push({ name: "Home" });
+    },
   },
 };
 </script>

@@ -14,6 +14,7 @@
             <p class="font-medium">Pilih Lokasi</p>
             <input
               class="text-sm p-2 focus:outline-none border border-secondary-color w-full mt-2"
+              id="location-kos"
               type="text"
               placeholder="Semua Kota"
             />
@@ -22,6 +23,7 @@
             <p class="font-medium">Tipe Kos</p>
             <input
               class="text-sm p-2 focus:outline-none border border-secondary-color w-full mt-2"
+              id="type-kos"
               type="text"
               placeholder="Putra/Putri"
             />
@@ -30,6 +32,7 @@
             <p class="font-medium">Rentan Harga</p>
             <input
               class="text-sm p-2 focus:outline-none border border-secondary-color w-full mt-2 font-Lato"
+              id="cost-kos-start"
               type="number"
               placeholder="500.000"
             />
@@ -37,6 +40,7 @@
           <div class="relative">
             <input
               class="text-sm p-2 focus:outline-none border border-secondary-color w-full mt-2 absolute bottom-0 font-Lato"
+              id="cost-kos-end"
               type="number"
               placeholder="1.000.000"
             />

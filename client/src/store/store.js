@@ -12,6 +12,11 @@ export default reactive({
     document.getElementById("modal").classList.toggle("hidden");
   },
 
+  authenticated: {
+    isAuthenticated: false,
+    user: null,
+  },
+
   formUserRegistration: {
     name: "",
     phone_number: "",
@@ -34,5 +39,10 @@ export default reactive({
     city: "",
     status: "",
     job: [],
+  },
+
+  formLoginUser: {
+    email: "",
+    password: "",
   },
 });

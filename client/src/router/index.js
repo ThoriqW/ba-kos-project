@@ -37,8 +37,8 @@ const routes = [
     component: DaftarUser,
   },
   {
-    path: "/daftar-kos",
-    name: "DaftarKos",
+    path: "/kos",
+    name: "Kos",
     component: KosView,
   },
   {

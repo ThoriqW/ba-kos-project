@@ -42,24 +42,24 @@
               />
             </div>
             <div class="my-5 sm:flex text-sm sm:items-center">
-              <label class="mr-2 w-5/12" for="gender">Jenis Kelamin</label>
-              <div class="w-full sm:flex mt-5 sm:mt-0" id="gender">
-                <label class="inline-flex items-center mr-10">
+              <p class="mr-2 w-5/12">Jenis Kelamin</p>
+              <div class="w-full sm:flex mt-5 sm:mt-0">
+                <label class="inline-flex items-center mr-10" for="lakilaki">
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.gender"
                     value="LakiLaki"
-                    id="LakiLaki"
+                    id="lakilaki"
                     class="w-4 h-4 text-button-color"
                   />
                   <span class="ml-4">Laki Laki</span>
                 </label>
-                <label class="inline-flex items-center">
+                <label class="inline-flex items-center" for="perempuan">
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.gender"
                     value="Perempuan"
-                    id="Perempuan"
+                    id="perempuan"
                     class="w-4 h-4 text-button-color"
                   />
                   <span class="ml-4">Perempuan</span>
@@ -104,34 +104,34 @@
               </select>
             </div>
             <div class="my-5 sm:flex text-sm sm:items-center">
-              <label class="mr-2 w-5/12" for="pekerjaan">Pekerjaan</label>
-              <div class="w-full sm:flex mt-5 sm:mt-0" id="pekerjaan">
-                <label class="inline-flex items-center mr-10">
+              <p class="mr-2 w-5/12">Pekerjaan</p>
+              <div class="w-full sm:flex mt-5 sm:mt-0">
+                <label class="inline-flex items-center mr-10" for="mahasiswa">
                   <input
                     v-model="store.formUserProfile.job"
                     type="checkbox"
-                    id="Mahasiswa"
+                    id="mahasiswa"
                     value="Mahasiswa"
                     class="w-4 h-4 text-button-color"
                   />
                   <span class="ml-4">Mahasiswa</span>
                 </label>
-                <label class="inline-flex items-center mr-10">
+                <label class="inline-flex items-center mr-10" for="karyawan">
                   <input
                     v-model="store.formUserProfile.job"
                     type="checkbox"
                     value="Karyawan"
-                    id="Karyawan"
+                    id="karyawan"
                     class="w-4 h-4 text-button-color"
                   />
                   <span class="ml-4">Karyawan</span>
                 </label>
-                <label class="inline-flex items-center">
+                <label class="inline-flex items-center" for="lainnya">
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.job"
                     value="Lainnya"
-                    id="Lainnya"
+                    id="lainnya"
                     class="w-4 h-4 text-button-color"
                   />
                   <span class="ml-4">Lainnya</span>
@@ -188,7 +188,7 @@ export default {
       store,
       error: null,
       router: useRouter(),
-      crumbs: ["Home", "/", "User"],
+      crumbs: [{ name: "Home", url: "/" }, { name: "User" }],
       profileImage: "",
     };
   },

@@ -220,7 +220,11 @@ export default {
     return {
       kos: null,
       store,
-      crumbs: ["Home", "/", "Kos", "/", "Profile Kos"],
+      crumbs: [
+        { name: "Home", url: "/" },
+        { name: "Kos", url: "/kos" },
+        { name: "Profile Kos" },
+      ],
     };
   },
   mounted() {
