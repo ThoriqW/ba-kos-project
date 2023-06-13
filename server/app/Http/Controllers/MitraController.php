@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class MitraController extends Controller
 {
@@ -36,16 +39,68 @@ class MitraController extends Controller
             $user->save();
             $user->assignRole('mitra');
 
+            $token = $user->createToken('API Token')->plainTextToken;
+
             // Mengembalikan response sukses dengan data pengguna yang baru ditambahkan
             return response()->json([
                 'message' => 'Mitra created successfully',
-                'user' => $user
+                'user' => $user,
+                'token' => $token
             ], 201);
         } catch (\Exception $e) {
             // Tangani kesalahan
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function loginMitra(Request $request)
+    {
+        try {
+            $validateUser = Validator::make(
+                $request->all(),
+                [
+                    'email' => 'required|email',
+                    'password' => 'required'
+                ]
+            );
+
+            if ($validateUser->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validateUser->errors()
+                ], 401);
+            }
+
+            $user = User::where('email', $request->email)->first();
+
+            if (!$user->hasRole('mitra')) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Unauthorized.'
+                ], 403);
+            }
+
+            if (!Auth::attempt($request->only(['email', 'password']))) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Email & Password do not match with our records.',
+                ], 401);
+            }
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User Logged In Successfully',
+                'token' => $user->createToken("API TOKEN")->plainTextToken
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => $th->getMessage()
+            ], 500);
+        }
+    }
+
 
     public function update(Request $request, User $user)
     {

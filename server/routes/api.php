@@ -21,6 +21,10 @@ use App\Http\Controllers\KosPhotoController;
 */
 
 Route::prefix('v1')->group(function () {
+
+    Route::post('/auth/users/login', [UserController::class, 'loginUser']);
+    Route::post('/auth/mitras/login', [MitraController::class, 'loginMitra']);
+
     Route::apiResource('users', UserController::class);
     Route::apiResource('mitras', MitraController::class);
     Route::apiResource('user-profiles', UserProfileController::class);
