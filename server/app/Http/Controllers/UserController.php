@@ -94,7 +94,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'user' => $user,
+                'user' => $user->load('userProfile'), // Memuat data profil terkait
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
