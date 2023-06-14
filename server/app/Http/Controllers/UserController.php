@@ -94,6 +94,7 @@ class UserController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
+                'user' => $user,
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
@@ -103,8 +104,6 @@ class UserController extends Controller
             ], 500);
         }
     }
-
-
 
     public function update(Request $request, User $user)
     {
