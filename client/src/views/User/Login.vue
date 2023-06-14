@@ -96,12 +96,14 @@ export default {
           .post("http://127.0.0.1:8000/api/v1/auth/users/login", data)
           .then((response) => {
             const token = response.data.token;
+            const userData = response.data.user;
 
+            localStorage.setItem("userData", JSON.stringify(userData));
             localStorage.setItem("token", token);
 
             this.router.push({ name: "Home" });
-
             console.log(response.data.message);
+            console.log(userData);
           });
       } catch (error) {
         this.error = error.response.data;

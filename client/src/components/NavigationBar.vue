@@ -68,8 +68,11 @@
               <router-link to="/kos">Kos</router-link>
             </li>
           </ul>
+          <div v-if="isAuthenticated" class="mr-2">
+            <p><span>Hello! </span>{{ userData.name }}</p>
+          </div>
           <button
-            v-if="store.authenticated.isAuthenticated"
+            v-if="isAuthenticated"
             type="button"
             class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
             @click.prevent="logout"
@@ -93,7 +96,6 @@
 <script>
 import store from "@/store/store";
 import { useRouter } from "vue-router";
-import axios from "axios";
 
 export default {
   name: "NavigationBar",
@@ -106,6 +108,7 @@ export default {
       store,
       url: this.$router.currentRoute.value.fullPath,
       isAuthenticated: false,
+      userData: {},
       router: useRouter(),
     };
   },
@@ -113,26 +116,13 @@ export default {
     if (this.url === "/") {
       document.getElementById("dynamic-navbar").classList.toggle("lg:block");
     }
-
     // Check if the user is already authenticated (e.g., token exists in local storage)
     if (localStorage.getItem("token")) {
-      this.store.authenticated.isAuthenticated = true;
-      const token = localStorage.getItem("token");
-
-      // Fetch user data
-      axios
-        .get("http://127.0.0.1:8000/api/v1/users", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          this.store.authenticated.user = response.data;
-          console.log(this.store.authenticated.user);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      this.isAuthenticated = true;
+      if (localStorage.getItem("userData")) {
+        this.userData = JSON.parse(localStorage.getItem("userData"));
+        console.log(this.userData);
+      }
     }
   },
   methods: {
@@ -140,10 +130,8 @@ export default {
     logout() {
       // Clear the token from local storage
       localStorage.removeItem("token");
-
       // Update the login status
-      this.store.authenticated.isAuthenticated = false;
-
+      this.isAuthenticated = false;
       // Redirect to the login page
       this.router.push({ name: "Home" });
     },
