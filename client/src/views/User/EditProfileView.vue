@@ -38,6 +38,7 @@
                 class="w-full p-2 border-2 border-secondary-color mt-2 sm:mt-0"
                 type="text"
                 name="name"
+                :value="userData.name"
                 id="name"
               />
             </div>
@@ -190,7 +191,15 @@ export default {
       router: useRouter(),
       crumbs: [{ name: "Home", url: "/" }, { name: "User" }],
       profileImage: "",
+      userData: {},
     };
+  },
+  mounted() {
+    if (localStorage.getItem("token")) {
+      if (localStorage.getItem("userData")) {
+        this.userData = JSON.parse(localStorage.getItem("userData"));
+      }
+    }
   },
   methods: {
     async editProfile(data) {

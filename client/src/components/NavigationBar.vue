@@ -71,14 +71,21 @@
           <div v-if="isAuthenticated" class="mr-2">
             <p><span>Hello! </span>{{ userData.name }}</p>
           </div>
-          <button
-            v-if="isAuthenticated"
-            type="button"
-            class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
-            @click.prevent="logout"
-          >
-            Keluar
-          </button>
+          <div v-if="isAuthenticated" class="flex items-center">
+            <button
+              type="button"
+              class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
+              @click.prevent="logout"
+            >
+              Keluar
+            </button>
+            <router-link to="/user/kos-saya">
+              <font-awesome-icon
+                class="mx-3 text-xl"
+                icon="fa-solid fa-circle-user"
+              />
+            </router-link>
+          </div>
           <button
             v-else
             type="button"

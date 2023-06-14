@@ -35,6 +35,7 @@ import {
   faCommentDollar,
   faUserShield,
   faChevronRight,
+  faCircleUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -59,7 +60,8 @@ library.add(
   faFile,
   faCommentDollar,
   faUserShield,
-  faChevronRight
+  faChevronRight,
+  faCircleUser
 );
 
 createApp(App)
