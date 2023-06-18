@@ -116,6 +116,7 @@ export default {
         if (error.response.status === 422) {
           this.error = error.response.data.errors;
         }
+        console.log(error);
       }
     },
   },

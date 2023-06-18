@@ -64,6 +64,18 @@ library.add(
   faCircleUser
 );
 
+// Tambahkan pengamanan autentikasi pada setiap perubahan rute
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem("token"); // Periksa apakah pengguna sudah login (contoh: token disimpan di localStorage)
+
+  // Jika halaman memerlukan autentikasi dan pengguna belum login, arahkan ke halaman login
+  if (to.matched.some((route) => route.meta.requiresAuth) && !isAuthenticated) {
+    next("/");
+  } else {
+    next();
+  }
+});
+
 createApp(App)
   .use(router, VueSplide)
   .component("font-awesome-icon", FontAwesomeIcon)

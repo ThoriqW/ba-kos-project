@@ -50,16 +50,25 @@ const routes = [
     path: "/user/kos-saya",
     name: "UserKosSayaView",
     component: UserKosSayaView,
+    meta: {
+      requiresAuth: true, // Menandakan bahwa halaman ini memerlukan autentikasi
+    },
   },
   {
     path: "/user/booking",
     name: "UserBookingView",
     component: UserBookingView,
+    meta: {
+      requiresAuth: true, // Menandakan bahwa halaman ini memerlukan autentikasi
+    },
   },
   {
     path: "/user/edit-profile",
     name: "EditProfileView",
     component: EditProfileView,
+    meta: {
+      requiresAuth: true, // Menandakan bahwa halaman ini memerlukan autentikasi
+    },
   },
 ];
 

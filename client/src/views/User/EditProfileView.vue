@@ -192,6 +192,7 @@ export default {
       crumbs: [{ name: "Home", url: "/" }, { name: "User" }],
       profileImage: "",
       userData: {},
+      userProfileData: {},
     };
   },
   mounted() {
@@ -199,21 +200,45 @@ export default {
       if (localStorage.getItem("userData")) {
         this.userData = JSON.parse(localStorage.getItem("userData"));
       }
+
+      if (this.userData.user_profile) {
+        this.fetchDataUserProfile(this.userData.id);
+      }
     }
   },
   methods: {
     async editProfile(data) {
       try {
         this.convertToString(data);
+        data.user_id = this.userData.id;
         await axios.post("http://127.0.0.1:8000/api/v1/user-profiles", data);
         await this.router.push({ name: "UserKosSayaView" });
+        console.log(data);
       } catch (error) {
         if (error.response && error.response.status === 500) {
-          this.error = error.response.data;
+          this.error = error.response.data.error;
           console.log(this.error);
         }
       }
     },
+
+    async fetchDataUserProfile(index) {
+      try {
+        await axios
+          .get(`http://127.0.0.1:8000/api/v1/user-profiles/${index}`)
+          .then((response) => {
+            this.userProfileData = response.data;
+            console.log(this.userProfileData);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } catch (error) {
+        this.error = error.response.data.error;
+        console.log(this.error);
+      }
+    },
+
     selectProfileImage(event) {
       const file = event.target.files[0];
       const reader = new FileReader();
@@ -227,6 +252,7 @@ export default {
         reader.readAsDataURL(file);
       }
     },
+
     convertToString(data) {
       data.job = data.job.join(", ");
       data.gender = data.gender.join(", ");

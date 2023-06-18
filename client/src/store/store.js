@@ -27,7 +27,7 @@ export default reactive({
   },
 
   formUserProfile: {
-    user_id: 2,
+    user_id: "",
     profile_photo: "",
     gender: [],
     birthdate: "",
