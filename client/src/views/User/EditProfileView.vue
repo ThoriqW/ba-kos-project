@@ -8,10 +8,7 @@
           <p class="font-bold sm:text-xl text-lg">Data Pribadi</p>
         </div>
         <div class="p-4 flex flex-col items-center justify-center">
-          <form
-            @submit.prevent="editProfile(store.formUserProfile)"
-            class="mt-4 sm:w-4/5"
-          >
+          <form @submit.prevent="handleFormSubmit" class="mt-4 sm:w-4/5">
             <div class="w-full flex flex-col items-center">
               <div
                 class="w-32 h-32 rounded-full bg-[url('../assets/image/user.png')] border-2 border-secondary-color relative overflow-hidden flex justify-center align-center bg-cover bg-center"
@@ -49,6 +46,7 @@
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.gender"
+                    v-on:click="clearCheckedGender"
                     value="LakiLaki"
                     id="lakilaki"
                     class="w-4 h-4 text-button-color"
@@ -59,6 +57,7 @@
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.gender"
+                    v-on:click="clearCheckedGender"
                     value="Perempuan"
                     id="perempuan"
                     class="w-4 h-4 text-button-color"
@@ -110,6 +109,7 @@
                 <label class="inline-flex items-center mr-10" for="mahasiswa">
                   <input
                     v-model="store.formUserProfile.job"
+                    v-on:click="clearCheckedJob"
                     type="checkbox"
                     id="mahasiswa"
                     value="Mahasiswa"
@@ -120,6 +120,7 @@
                 <label class="inline-flex items-center mr-10" for="karyawan">
                   <input
                     v-model="store.formUserProfile.job"
+                    v-on:click="clearCheckedJob"
                     type="checkbox"
                     value="Karyawan"
                     id="karyawan"
@@ -131,6 +132,7 @@
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.job"
+                    v-on:click="clearCheckedJob"
                     value="Lainnya"
                     id="lainnya"
                     class="w-4 h-4 text-button-color"
@@ -153,7 +155,7 @@
                 class="btn px-3 py-2 bg-button-color mt-2 mr-4 text-primary-color"
                 type="submit"
               >
-                Simpan
+                {{ this.userData.user_profile ? "Edit Profile" : "Simpan" }}
               </button>
               <button
                 class="btn px-3 py-2 bg-cancel-color mt-2 text-primary-color"
@@ -192,7 +194,6 @@ export default {
       crumbs: [{ name: "Home", url: "/" }, { name: "User" }],
       profileImage: "",
       userData: {},
-      userProfileData: {},
     };
   },
   mounted() {
@@ -200,17 +201,23 @@ export default {
       if (localStorage.getItem("userData")) {
         this.userData = JSON.parse(localStorage.getItem("userData"));
       }
-
-      if (this.userData.user_profile) {
-        this.fetchDataUserProfile(this.userData.id);
-      }
+      this.getDataUser(this.userData.id);
     }
   },
   methods: {
+    handleFormSubmit() {
+      // Logic for form submission
+      if (this.userData.user_profile) {
+        this.updateProfile(this.store.formUserProfile);
+      } else {
+        this.editProfile(this.store.formUserProfile);
+      }
+    },
+
     async editProfile(data) {
+      data.user_id = this.userData.id;
       try {
         this.convertToString(data);
-        data.user_id = this.userData.id;
         await axios.post("http://127.0.0.1:8000/api/v1/user-profiles", data);
         await this.router.push({ name: "UserKosSayaView" });
         console.log(data);
@@ -222,13 +229,39 @@ export default {
       }
     },
 
-    async fetchDataUserProfile(index) {
+    async updateProfile(data) {
+      console.log(data);
+      try {
+        this.convertToString(data);
+        await axios.put(
+          `http://127.0.0.1:8000/api/v1/user-profiles/${this.userData.user_profile.id}`,
+          data
+        );
+        await this.router.push({ name: "UserKosSayaView" });
+        console.log(data);
+      } catch (error) {
+        if (error.response && error.response.status === 500) {
+          this.error = error.response.data.error;
+          console.log(this.error);
+        }
+      }
+    },
+
+    async getDataUser(index) {
       try {
         await axios
-          .get(`http://127.0.0.1:8000/api/v1/user-profiles/${index}`)
+          .get(`http://127.0.0.1:8000/api/v1/users/${index}`)
           .then((response) => {
-            this.userProfileData = response.data;
-            console.log(this.userProfileData);
+            this.userData = response.data;
+            if (this.userData.user_profile) {
+              this.store.formUserProfile = { ...this.userData.user_profile };
+              this.store.formUserProfile.gender = [
+                this.store.formUserProfile.gender,
+              ];
+              this.store.formUserProfile.job = [this.store.formUserProfile.job];
+            }
+            console.log(this.userData);
+            console.log(this.store.formUserProfile);
           })
           .catch(function (error) {
             console.log(error);
@@ -256,6 +289,20 @@ export default {
     convertToString(data) {
       data.job = data.job.join(", ");
       data.gender = data.gender.join(", ");
+    },
+
+    clearCheckedJob(e) {
+      this.store.formUserProfile.job = [];
+      if (e.target.checked) {
+        this.store.formUserProfile.job.push(e.target.value);
+      }
+    },
+
+    clearCheckedGender(e) {
+      this.store.formUserProfile.gender = [];
+      if (e.target.checked) {
+        this.store.formUserProfile.gender.push(e.target.value);
+      }
     },
   },
 };
