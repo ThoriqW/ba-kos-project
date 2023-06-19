@@ -22,7 +22,8 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return response()->json($user);
+        return response()->json($user->load('userProfile'));
+        // Memuat data profil terkait
     }
 
     public function store(Request $request)
