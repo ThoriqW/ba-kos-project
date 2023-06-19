@@ -20,6 +20,11 @@ class UserController extends Controller
         return response()->json($user);
     }
 
+    public function show(User $user)
+    {
+        return response()->json($user);
+    }
+
     public function store(Request $request)
     {
         try {
