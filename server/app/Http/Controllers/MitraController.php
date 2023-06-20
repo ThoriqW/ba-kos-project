@@ -13,8 +13,14 @@ class MitraController extends Controller
 
     public function index()
     {
-        $user = User::all();
+        $user = User::role('mitra')->get();
         return response()->json($user);
+    }
+
+    public function show(User $user)
+    {
+        return response()->json($user->load('kos'));
+        // Memuat data profil terkait
     }
 
     public function store(Request $request)
