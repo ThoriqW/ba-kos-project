@@ -36,6 +36,10 @@ import {
   faUserShield,
   faChevronRight,
   faCircleUser,
+  faBuilding,
+  faBullhorn,
+  faChartSimple,
+  faCirclePlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -61,7 +65,11 @@ library.add(
   faCommentDollar,
   faUserShield,
   faChevronRight,
-  faCircleUser
+  faCircleUser,
+  faBuilding,
+  faBullhorn,
+  faChartSimple,
+  faCirclePlus
 );
 
 // Tambahkan pengamanan autentikasi pada setiap perubahan rute
@@ -72,7 +80,15 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some((route) => route.meta.requiresAuth) && !isAuthenticated) {
     next("/");
   } else {
-    next();
+    const requiredRoles = to.meta.roles;
+    const userRole = localStorage.getItem("roles");
+    if (requiredRoles && !requiredRoles.includes(userRole)) {
+      // User does not have the required role, redirect to a unauthorized page or show an error message
+      next("/unauthorized");
+    } else {
+      // User is authenticated and has the required role, proceed to the requested route
+      next();
+    }
   }
 });
 

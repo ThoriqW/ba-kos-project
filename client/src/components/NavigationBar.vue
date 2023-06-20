@@ -79,12 +79,22 @@
             >
               Keluar
             </button>
-            <router-link to="/user/kos-saya">
-              <font-awesome-icon
-                class="mx-3 text-xl"
-                icon="fa-solid fa-circle-user"
-              />
-            </router-link>
+            <div v-if="userData.roles[0].name == 'mitra'">
+              <router-link to="/mitra/dashboard">
+                <font-awesome-icon
+                  class="mx-3 text-xl"
+                  icon="fa-solid fa-circle-user"
+                />
+              </router-link>
+            </div>
+            <div v-else>
+              <router-link to="/user/kos-saya">
+                <font-awesome-icon
+                  class="mx-3 text-xl"
+                  icon="fa-solid fa-circle-user"
+                />
+              </router-link>
+            </div>
           </div>
           <button
             v-else
@@ -128,7 +138,6 @@ export default {
       this.isAuthenticated = true;
       if (localStorage.getItem("userData")) {
         this.userData = JSON.parse(localStorage.getItem("userData"));
-        console.log(this.userData);
       }
     }
   },

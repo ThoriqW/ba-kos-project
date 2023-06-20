@@ -9,6 +9,7 @@ import UserBookingView from "@/views/User/UserBookingView.vue";
 import DaftarMitra from "@/views/Mitra/Daftar.vue";
 import DaftarUser from "@/views/User/Daftar.vue";
 import EditProfileView from "@/views/User/EditProfileView.vue";
+import DashboardMitraView from "@/views/Mitra/DashboardMitraView.vue";
 
 const routes = [
   {
@@ -51,7 +52,8 @@ const routes = [
     name: "UserKosSayaView",
     component: UserKosSayaView,
     meta: {
-      requiresAuth: true, // Menandakan bahwa halaman ini memerlukan autentikasi
+      requiresAuth: true,
+      roles: ["user"], // Menandakan bahwa halaman ini memerlukan autentikasi
     },
   },
   {
@@ -59,7 +61,8 @@ const routes = [
     name: "UserBookingView",
     component: UserBookingView,
     meta: {
-      requiresAuth: true, // Menandakan bahwa halaman ini memerlukan autentikasi
+      requiresAuth: true,
+      roles: ["user"], // Menandakan bahwa halaman ini memerlukan autentikasi
     },
   },
   {
@@ -67,7 +70,17 @@ const routes = [
     name: "EditProfileView",
     component: EditProfileView,
     meta: {
-      requiresAuth: true, // Menandakan bahwa halaman ini memerlukan autentikasi
+      requiresAuth: true,
+      roles: ["user"], // Menandakan bahwa halaman ini memerlukan autentikasi
+    },
+  },
+  {
+    path: "/mitra/dashboard",
+    name: "DashboardMitraView",
+    component: DashboardMitraView,
+    meta: {
+      requiresAuth: true,
+      roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi
     },
   },
 ];

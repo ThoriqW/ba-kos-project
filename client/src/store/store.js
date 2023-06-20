@@ -40,4 +40,9 @@ export default reactive({
     email: "",
     password: "",
   },
+
+  formLoginMitra: {
+    email: "",
+    password: "",
+  },
 });
