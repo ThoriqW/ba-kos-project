@@ -31,7 +31,7 @@ class MitraController extends Controller
                 'name' => 'required|min:3|max:255',
                 'email' => 'required|email:dns|unique:users',
                 'phone_number' => 'required|unique:users|regex:/^08\d{8,}$/i',
-                'password' => 'required|min:8'
+                'password' => 'required|min:8|confirmed'
             ]);
 
             // Membuat objek User baru
