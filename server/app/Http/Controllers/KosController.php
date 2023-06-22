@@ -6,6 +6,7 @@ use App\Models\Kos;
 use App\Http\Requests\StoreKosRequest;
 use App\Http\Requests\UpdateKosRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class KosController extends Controller
 {
@@ -35,9 +36,8 @@ class KosController extends Controller
 
             $kos = Kos::create($request->all());
             return response()->json($kos, 201);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
@@ -55,9 +55,8 @@ class KosController extends Controller
 
             $kos->update($request->all());
             return response()->json($kos);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
@@ -66,9 +65,8 @@ class KosController extends Controller
         try {
             $kos->delete();
             return response()->json(null, 204);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 }
