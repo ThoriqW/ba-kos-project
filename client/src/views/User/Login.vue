@@ -17,11 +17,6 @@
               id="number"
               required
             />
-            <div v-if="error">
-              <p v-if="error.email" class="text-red-500 text-xs italic mt-1">
-                {{ error.email[0] }}
-              </p>
-            </div>
           </div>
           <div class="my-3">
             <label class="text-sm" for="password">Password</label>
@@ -32,11 +27,11 @@
               id="password"
               required
             />
-            <div v-if="error">
-              <p v-if="error.password" class="text-red-500 text-xs italic mt-1">
-                {{ error.password[0] }}
-              </p>
-            </div>
+          </div>
+          <div v-if="error">
+            <p class="text-red-500 text-xs italic mt-1">
+              {{ error }}
+            </p>
           </div>
           <button
             class="w-full bg-button-color btn py-2 text-secondary-color my-3"
@@ -119,9 +114,7 @@ export default {
             console.log(roles);
           });
       } catch (error) {
-        if (error.response.status === 422) {
-          this.error = error.response.data.errors;
-        }
+        this.error = error.response.data.message;
         console.log(this.error);
       }
     },
