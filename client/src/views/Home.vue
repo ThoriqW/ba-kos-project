@@ -120,7 +120,7 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import HeaderHome from "@/components/HeaderHome.vue";
-import KosCard from "@/components/KosCard.vue";
+import KosCard from "@/components/Kos/KosCard.vue";
 import AreaSection from "@/components/AreaSection.vue";
 import CampusSection from "@/components/CampusSection.vue";
 import CallToActionSection from "@/components/CallToActionSection.vue";
@@ -154,7 +154,7 @@ export default {
   data() {
     return {
       store,
-      crumbs: ["Home"],
+      crumbs: [{ name: "Home", url: "/" }],
     };
   },
 };

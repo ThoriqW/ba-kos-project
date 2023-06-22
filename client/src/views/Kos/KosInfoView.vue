@@ -209,7 +209,7 @@ import store from "@/store/store";
 import Breedcrumb from "@/components/Breedcrumb.vue";
 
 export default {
-  name: "KosDetailPage",
+  name: "KosInfoView",
   components: {
     NavigationBar,
     Footer,
@@ -228,7 +228,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.params.id); // For debugging purposes
     this.fetchKosDetail();
   },
   methods: {

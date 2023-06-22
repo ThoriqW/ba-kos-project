@@ -10,6 +10,7 @@ import DaftarMitra from "@/views/Mitra/Daftar.vue";
 import DaftarUser from "@/views/User/Daftar.vue";
 import EditProfileView from "@/views/User/EditProfileView.vue";
 import DashboardMitraView from "@/views/Mitra/DashboardMitraView.vue";
+import TambahDataKosView from "@/views/Kos/TambahDataKosView.vue";
 
 const routes = [
   {
@@ -44,7 +45,7 @@ const routes = [
   },
   {
     path: "/kos/:id",
-    name: "KosDetailPage",
+    name: "KosInfoView",
     component: KosInfoView,
   },
   {
@@ -78,6 +79,24 @@ const routes = [
     path: "/mitra/dashboard",
     name: "DashboardMitraView",
     component: DashboardMitraView,
+    meta: {
+      requiresAuth: true,
+      roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi
+    },
+  },
+  {
+    path: "/mitra/dashboard",
+    name: "DashboardMitraView",
+    component: DashboardMitraView,
+    meta: {
+      requiresAuth: true,
+      roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi
+    },
+  },
+  {
+    path: "/mitra/dashboard/tambah-kos/step/:id",
+    name: "TambahDataKosView",
+    component: TambahDataKosView,
     meta: {
       requiresAuth: true,
       roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi

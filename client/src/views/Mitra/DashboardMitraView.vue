@@ -35,10 +35,7 @@
           </router-link>
         </li>
         <li>
-          <a
-            href="#"
-            class="flex items-center p-2 text-gray-900 rounded-lg bg-button-color"
-          >
+          <a href="#" class="flex items-center p-2 rounded-lg bg-button-color">
             <div class="flex justify-center w-5">
               <font-awesome-icon icon="fa-solid fa-house" />
             </div>
@@ -46,7 +43,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg">
+          <a href="#" class="flex items-center p-2 rounded-lg">
             <div class="flex justify-center w-5">
               <font-awesome-icon icon="fa-solid fa-building" />
             </div>
@@ -54,7 +51,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg">
+          <a href="#" class="flex items-center p-2 rounded-lg">
             <div class="flex justify-center w-5">
               <font-awesome-icon icon="fa-solid fa-bullhorn" />
             </div>
@@ -62,7 +59,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg">
+          <a href="#" class="flex items-center p-2 rounded-lg">
             <div class="flex justify-center w-5">
               <font-awesome-icon icon="fa-solid fa-chart-simple" />
             </div>
@@ -70,7 +67,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg">
+          <a href="#" class="flex items-center p-2 rounded-lg">
             <div class="flex justify-center w-5">
               <font-awesome-icon icon="fa-solid fa-user-shield" />
             </div>
@@ -83,7 +80,7 @@
 
   <div class="p-4 sm:ml-64">
     <Breedcrumb :crumbs="crumbs"></Breedcrumb>
-    <div class="mt-4 px-5 p-4 border-2 border-secondary-color">
+    <div class="mt-4 p-4 border-2 border-secondary-color">
       <div class="flex items-center justify-between">
         <h1 class="text-3xl font-bold">Halo, Thoriq Wajedi</h1>
         <a href="#">
@@ -96,7 +93,7 @@
     </div>
     <div class="flex">
       <div class="mr-4">
-        <div class="mt-4 px-5 p-4 border-2 border-secondary-color">
+        <div class="mt-4 p-4 border-2 border-secondary-color">
           <p class="font-bold">Jumlah Property</p>
           <div class="flex items-center">
             <div class="flex w-8">
@@ -108,7 +105,7 @@
             <p class="text-2xl mr-4">10</p>
           </div>
         </div>
-        <div class="mt-4 px-5 p-4 border-2 border-secondary-color">
+        <div class="mt-4 p-4 border-2 border-secondary-color">
           <p class="font-bold">Property Kosong</p>
           <div class="flex items-center">
             <div class="flex w-8">
@@ -122,21 +119,22 @@
         </div>
       </div>
       <div class="flex flex-auto mr-4">
-        <div class="mt-4 px-5 p-4 border-2 border-secondary-color w-full">
+        <div class="mt-4 p-4 border-2 border-secondary-color w-full">
           <p>Data Property</p>
         </div>
       </div>
       <div class="flex flex-auto">
-        <div class="mt-4 px-5 p-4 border-2 border-secondary-color w-full">
+        <div class="mt-4 p-4 border-2 border-secondary-color w-full">
           <p>Pendapatan</p>
         </div>
       </div>
     </div>
-    <div class="mt-4 px-5 p-4 border-2 border-secondary-color">
+    <div class="mt-4 p-4 border-2 border-secondary-color">
       <h1 class="text-xl font-bold">Kelola Property Anda</h1>
       <div class="flex">
-        <div
-          class="flex-auto mt-4 mr-4 px-5 p-4 border-2 border-secondary-color"
+        <a
+          @click.prevent="navigateToCreateKos()"
+          class="flex-auto mt-4 mr-4 p-4 border-2 border-secondary-color cursor-pointer"
         >
           <div class="flex items-center">
             <div class="flex w-10">
@@ -147,9 +145,9 @@
             </div>
             <p>Tambah Property</p>
           </div>
-        </div>
-        <div
-          class="flex-auto mt-4 mr-4 px-5 p-4 border-2 border-secondary-color"
+        </a>
+        <a
+          class="flex-auto mt-4 mr-4 p-4 border-2 border-secondary-color cursor-pointer"
         >
           <div class="flex items-center">
             <div class="flex w-10">
@@ -160,7 +158,7 @@
             </div>
             <p>Pusat Bantuan</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </div>
@@ -178,6 +176,11 @@ export default {
     return {
       crumbs: [{ name: "Home", url: "/" }, { name: "Dashboard" }],
     };
+  },
+  methods: {
+    navigateToCreateKos() {
+      this.$router.push({ name: "TambahDataKosView", params: { id: 1 } });
+    },
   },
 };
 </script>

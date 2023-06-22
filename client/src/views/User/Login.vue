@@ -13,20 +13,30 @@
             <input
               v-model="store.formLoginUser.email"
               class="w-full p-2 mt-2"
-              type="text"
+              type="email"
               id="number"
               required
             />
+            <div v-if="error">
+              <p v-if="error.email" class="text-red-500 text-xs italic mt-1">
+                {{ error.email[0] }}
+              </p>
+            </div>
           </div>
           <div class="my-3">
             <label class="text-sm" for="password">Password</label>
             <input
               v-model="store.formLoginUser.password"
               class="w-full p-2 mt-2"
-              type="text"
+              type="password"
               id="password"
               required
             />
+            <div v-if="error">
+              <p v-if="error.password" class="text-red-500 text-xs italic mt-1">
+                {{ error.password[0] }}
+              </p>
+            </div>
           </div>
           <button
             class="w-full bg-button-color btn py-2 text-secondary-color my-3"
@@ -109,7 +119,9 @@ export default {
             console.log(roles);
           });
       } catch (error) {
-        this.error = error.response.data;
+        if (error.response.status === 422) {
+          this.error = error.response.data.errors;
+        }
         console.log(this.error);
       }
     },

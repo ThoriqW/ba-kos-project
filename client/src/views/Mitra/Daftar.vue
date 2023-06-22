@@ -29,7 +29,7 @@
               v-model="store.formMitraRegistration.phone_number"
               class="w-full p-2 mt-2"
               id="phone_number"
-              type="text"
+              type="number"
               required
             />
             <div v-if="error">
@@ -47,7 +47,7 @@
               v-model="store.formMitraRegistration.email"
               class="w-full p-2 mt-2"
               id="email"
-              type="text"
+              type="email"
               required
             />
             <div v-if="error">
@@ -62,7 +62,7 @@
               v-model="store.formMitraRegistration.password"
               class="w-full p-2 mt-2"
               id="password"
-              type="text"
+              type="password"
               required
             />
             <div v-if="error">
@@ -77,7 +77,7 @@
             >
             <input
               class="w-full p-2 mt-2"
-              type="text"
+              type="password"
               id="password_confirmation"
             />
           </div>

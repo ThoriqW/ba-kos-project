@@ -40,6 +40,7 @@ import {
   faBullhorn,
   faChartSimple,
   faCirclePlus,
+  faCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -69,7 +70,8 @@ library.add(
   faBuilding,
   faBullhorn,
   faChartSimple,
-  faCirclePlus
+  faCirclePlus,
+  faCircleCheck
 );
 
 // Tambahkan pengamanan autentikasi pada setiap perubahan rute

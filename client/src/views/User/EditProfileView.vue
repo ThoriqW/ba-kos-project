@@ -38,6 +38,11 @@
                 :value="userData.name"
                 id="name"
               />
+              <div v-if="error">
+                <p v-if="error.name" class="text-red-500 text-xs italic mt-1">
+                  {{ error.name[0] }}
+                </p>
+              </div>
             </div>
             <div class="my-5 sm:flex text-sm sm:items-center">
               <p class="mr-2 w-5/12">Jenis Kelamin</p>
@@ -46,7 +51,7 @@
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.gender"
-                    v-on:click="clearCheckedGender"
+                    v-on:click="clearCheckedField('gender', 'LakiLaki')"
                     value="LakiLaki"
                     id="lakilaki"
                     class="w-4 h-4 text-button-color"
@@ -57,7 +62,7 @@
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.gender"
-                    v-on:click="clearCheckedGender"
+                    v-on:click="clearCheckedField('gender', 'Perempuan')"
                     value="Perempuan"
                     id="perempuan"
                     class="w-4 h-4 text-button-color"
@@ -89,6 +94,11 @@
                 name="kota-asal"
                 id="kota-asal"
               />
+              <div v-if="error">
+                <p v-if="error.city" class="text-red-500 text-xs italic mt-1">
+                  {{ error.city[0] }}
+                </p>
+              </div>
             </div>
             <div class="my-5 sm:flex sm:items-center">
               <label class="mr-2 text-sm w-5/12" for="status">Status</label>
@@ -109,7 +119,7 @@
                 <label class="inline-flex items-center mr-10" for="mahasiswa">
                   <input
                     v-model="store.formUserProfile.job"
-                    v-on:click="clearCheckedJob"
+                    v-on:click="clearCheckedField('job', 'Mahasiswa')"
                     type="checkbox"
                     id="mahasiswa"
                     value="Mahasiswa"
@@ -120,7 +130,7 @@
                 <label class="inline-flex items-center mr-10" for="karyawan">
                   <input
                     v-model="store.formUserProfile.job"
-                    v-on:click="clearCheckedJob"
+                    v-on:click="clearCheckedField('job', 'Karyawan')"
                     type="checkbox"
                     value="Karyawan"
                     id="karyawan"
@@ -132,7 +142,7 @@
                   <input
                     type="checkbox"
                     v-model="store.formUserProfile.job"
-                    v-on:click="clearCheckedJob"
+                    v-on:click="clearCheckedField('job', 'Lainnya')"
                     value="Lainnya"
                     id="lainnya"
                     class="w-4 h-4 text-button-color"
@@ -222,10 +232,10 @@ export default {
         await this.router.push({ name: "UserKosSayaView" });
         console.log(data);
       } catch (error) {
-        if (error.response && error.response.status === 500) {
-          this.error = error.response.data.error;
-          console.log(this.error);
+        if (error.response.status === 422) {
+          this.error = error.response.data.errors;
         }
+        console.log(this.error);
       }
     },
 
@@ -240,10 +250,10 @@ export default {
         await this.router.push({ name: "UserKosSayaView" });
         console.log(data);
       } catch (error) {
-        if (error.response && error.response.status === 500) {
-          this.error = error.response.data.error;
-          console.log(this.error);
+        if (error.response.status === 422) {
+          this.error = error.response.data.errors;
         }
+        console.log(this.error);
       }
     },
 
@@ -291,17 +301,11 @@ export default {
       data.gender = data.gender.join(", ");
     },
 
-    clearCheckedJob(e) {
-      this.store.formUserProfile.job = [];
-      if (e.target.checked) {
-        this.store.formUserProfile.job.push(e.target.value);
-      }
-    },
-
-    clearCheckedGender(e) {
-      this.store.formUserProfile.gender = [];
-      if (e.target.checked) {
-        this.store.formUserProfile.gender.push(e.target.value);
+    clearCheckedField(field, value) {
+      this.store.formUserProfile[field] = [];
+      if (value) {
+        this.store.formUserProfile[field].push(value);
+        console.log(this.store.formUserProfile[field]);
       }
     },
   },

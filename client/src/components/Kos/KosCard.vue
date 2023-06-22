@@ -53,7 +53,7 @@ export default {
   name: "KosCard",
   methods: {
     navigateToDetail() {
-      this.$router.push({ name: "KosDetailPage", params: { id: this.kosId } });
+      this.$router.push({ name: "KosInfoView", params: { id: this.kosId } });
     },
   },
   props: {

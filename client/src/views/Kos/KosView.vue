@@ -47,8 +47,8 @@
 
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
-import KosCard from "@/components/KosCard.vue";
-import HeaderKosPage from "@/components/HeaderKosPage.vue";
+import KosCard from "@/components/Kos/KosCard.vue";
+import HeaderKosPage from "@/components/Kos/HeaderKosPage.vue";
 import Footer from "@/components/Footer.vue";
 import Breedcrumb from "@/components/Breedcrumb.vue";
 import ModalLogin from "@/components/ModalLogin.vue";
@@ -86,7 +86,6 @@ export default {
   methods: {
     previousPage() {
       if (this.currentPage > 1) {
-        console.log("tes");
         this.currentPage--;
       }
     },
