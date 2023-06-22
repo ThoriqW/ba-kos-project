@@ -114,7 +114,7 @@ export default {
         await this.router.push({ name: "LoginUser" });
       } catch (error) {
         if (error.response.status === 422) {
-          this.error = error.response.data.errors;
+          this.error = error.response.data.errors
         }
         console.log(this.error);
       }

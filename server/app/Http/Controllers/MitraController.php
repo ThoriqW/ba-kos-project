@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class MitraController extends Controller
 {
@@ -31,7 +32,7 @@ class MitraController extends Controller
                 'name' => 'required|min:3|max:255',
                 'email' => 'required|email:dns|unique:users',
                 'phone_number' => 'required|unique:users|regex:/^08\d{8,}$/i',
-                'password' => 'required|min:8'
+                'password' => 'required|min:8|confirmed'
             ]);
 
             // Membuat objek User baru
@@ -53,28 +54,23 @@ class MitraController extends Controller
                 'user' => $user,
                 'token' => $token
             ], 201);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
     public function loginMitra(Request $request)
     {
         try {
-            $validateUser = Validator::make(
-                $request->all(),
-                [
-                    'email' => 'required|email',
-                    'password' => 'required'
-                ]
-            );
+            $credentials = $request->validate([
+                'email' => 'required|email:dns',
+                'password' => 'required',
+            ]);
 
-            if ($validateUser->fails()) {
+            if (!Auth::attempt($credentials)) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Validation error',
-                    'errors' => $validateUser->errors()
+                    'message' => 'Email atau password yang Anda masukkan tidak valid.',
                 ], 401);
             }
 
@@ -83,28 +79,21 @@ class MitraController extends Controller
             if (!$user->hasRole('mitra')) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Unauthorized.'
+                    'message' => 'Email atau password yang Anda masukkan tidak valid.',
                 ], 403);
             }
 
-            if (!Auth::attempt($request->only(['email', 'password']))) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Email & Password do not match with our records.',
-                ], 401);
-            }
+            // Login berhasil, buat token dan kirimkan respons sukses
+            $token = $user->createToken('API Token')->plainTextToken;
 
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
                 'user' => $user->load('kos'), // Memuat data profil terkait
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $token,
             ], 200);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
@@ -134,9 +123,8 @@ class MitraController extends Controller
                 'message' => 'User updated successfully',
                 'user' => $user
             ]);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
@@ -148,9 +136,8 @@ class MitraController extends Controller
 
             // Mengembalikan response sukses tanpa data (204 No Content)
             return response()->json(null, 204);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 }

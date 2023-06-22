@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class UserProfileController extends Controller
 {
@@ -34,9 +35,8 @@ class UserProfileController extends Controller
 
             $userProfile = UserProfile::create($request->all());
             return response()->json($userProfile, 201);
-        } catch (\Exception $e) {
-            // Tangani kesalahan
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
@@ -54,9 +54,8 @@ class UserProfileController extends Controller
 
             $userProfile->update($request->all());
             return response()->json($userProfile);
-        } catch (\Exception $e) {
-            // Handle the error
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 
@@ -65,9 +64,8 @@ class UserProfileController extends Controller
         try {
             $userProfile->delete();
             return response()->json(null, 204);
-        } catch (\Exception $e) {
-            // Handle the error
-            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (ValidationException $e) {
+            return response()->json(['errors' => $e->errors()], 422);
         }
     }
 }
