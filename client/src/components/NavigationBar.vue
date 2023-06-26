@@ -99,6 +99,15 @@
             >
               <router-link to="/kos">Kos</router-link>
             </li>
+            <div v-if="isAuthenticated" class="mr-2">
+              <div v-if="userData.roles[0].name == 'user'">
+                <li
+                  class="my-2 sm:my-0 sm:mr-6 sm:relative sm:after:h-0.5 sm:after:duration-150 sm:after:block sm:after:absolute sm:after:w-0 sm:after:bg-button-color sm:hover:after:w-full"
+                >
+                  <router-link to="/kos">Chat</router-link>
+                </li>
+              </div>
+            </div>
           </ul>
           <div v-if="isAuthenticated" class="mr-2">
             <p><span>Hello! </span>{{ userData.name }}</p>

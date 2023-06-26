@@ -38,13 +38,13 @@
               <input
                 type="search"
                 id="search"
-                class="block w-full p-4 pl-10 text-sm text-gray-900 border bg-secondary-color focus:outline-none focus:border-button-color"
+                class="block w-full p-3 pl-10 text-sm text-gray-900 border bg-secondary-color focus:outline-none focus:border-button-color"
                 placeholder="Search"
                 required
               />
               <button
                 type="submit"
-                class="text-white absolute right-2.5 bottom-2.5 bg-button-color font-medium text-sm px-4 py-2"
+                class="text-white absolute right-2.5 bottom-1.5 bg-button-color font-medium text-sm px-4 py-2"
               >
                 Search
               </button>
