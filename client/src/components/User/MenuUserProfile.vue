@@ -18,7 +18,7 @@
         </div>
         <router-link
           to="/user/edit-profile"
-          class="btn px-3 py-2 bg-button-color text-primary-color sm:text-sm text-xs mt-2"
+          class="btn px-4 py-2 bg-button-color text-primary-color sm:text-sm text-xs mt-2"
         >
           Edit Profile
         </router-link>

@@ -10,11 +10,11 @@
           Ayo Cari Kos Impian Kamu!
         </h1>
         <div class="mt-4 flex inline-block flex-col">
-          <button class="btn px-6 py-2 bg-secondary-color text-sm font-Lato">
+          <button class="btn px-4 py-2 bg-secondary-color text-sm font-Lato">
             082296709235
           </button>
           <button
-            class="btn px-6 py-2 mt-2 bg-button-color text-primary-color text-sm"
+            class="btn px-4 py-2 mt-2 bg-button-color text-primary-color text-sm"
           >
             Yuk Bergabung
           </button>
@@ -31,7 +31,7 @@
           Apakah anda pemilik kos?!
         </h1>
         <div class="mt-4 flex inline-block flex-col">
-          <button class="btn px-6 py-2 mt-2 bg-secondary-color text-sm">
+          <button class="btn px-4 py-2 mt-2 bg-secondary-color text-sm">
             Yuk Bergabung
           </button>
         </div>

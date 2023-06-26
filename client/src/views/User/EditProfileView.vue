@@ -162,13 +162,13 @@
             </div>
             <div class="flex">
               <button
-                class="btn px-3 py-2 bg-button-color mt-2 mr-4 text-primary-color"
+                class="btn px-4 py-2 bg-button-color mt-2 mr-4 text-primary-color"
                 type="submit"
               >
                 {{ this.userData.user_profile ? "Edit Profile" : "Simpan" }}
               </button>
               <button
-                class="btn px-3 py-2 bg-cancel-color mt-2 text-primary-color"
+                class="btn px-4 py-2 bg-cancel-color mt-2 text-primary-color"
               >
                 Batal
               </button>

@@ -1,14 +1,14 @@
 <template>
   <div class="flex justify-between">
     <button
-      class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
+      class="btn px-4 py-2 bg-button-color text-primary-color text-sm"
       :disabled="isButtonDisabled"
       @click.prevent="back()"
     >
       Kembali
     </button>
     <button
-      class="btn px-6 py-2 bg-button-color text-primary-color text-sm"
+      class="btn px-4 py-2 bg-button-color text-primary-color text-sm"
       @click.prevent="next()"
     >
       Selanjutnya
