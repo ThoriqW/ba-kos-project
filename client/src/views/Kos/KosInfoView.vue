@@ -204,7 +204,7 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import Footer from "@/components/Footer.vue";
-import WhyChooseUsSection from "@/components/WhyChooseUsSection.vue";
+import WhyChooseUsSection from "@/components/Home/WhyChooseUsSection.vue";
 import store from "@/store/store";
 import Breedcrumb from "@/components/Breedcrumb.vue";
 

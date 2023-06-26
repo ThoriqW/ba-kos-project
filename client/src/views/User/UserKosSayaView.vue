@@ -18,8 +18,8 @@
 <script>
 import NavigationBar from "@/components/NavigationBar.vue";
 import Breedcrumb from "@/components/Breedcrumb.vue";
-import KosSayaUser from "@/components/KosSayaUser.vue";
-import MenuUserProfile from "@/components/MenuUserProfile.vue";
+import KosSayaUser from "@/components/User/KosSayaUser.vue";
+import MenuUserProfile from "@/components/User/MenuUserProfile.vue";
 
 export default {
   name: "UserKosSaya",

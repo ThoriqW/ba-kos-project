@@ -3,8 +3,6 @@
   <NavigationBar></NavigationBar>
   <HeaderHome></HeaderHome>
 
-  <Breedcrumb :crumbs="crumbs"></Breedcrumb>
-
   <div class="container max-w-screen-xl mx-auto px-5">
     <!-- Rekomendasi Section -->
     <section class="my-14">
@@ -23,40 +21,25 @@
           </button>
         </div>
       </div>
-      <Splide :options="{ rewind: true }" aria-label="Rekomendasi Kos">
-        <SplideSlide>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <KosCard
-              v-for="kos in store.rekomendasiKos"
-              :imgURL="kos.img"
-              :type="kos.type"
-              :rating="kos.rating"
-              :name="kos.name"
-              :kec="kos.kec"
-              :harga="kos.harga"
-              :desc="kos.desc"
-              :kosId="kos.id"
-              v-bind:key="kos.id"
-            ></KosCard>
-          </div>
-        </SplideSlide>
-        <SplideSlide>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <KosCard
-              v-for="kos in store.rekomendasiKos"
-              :imgURL="kos.img"
-              :type="kos.type"
-              :rating="kos.rating"
-              :name="kos.name"
-              :kec="kos.kec"
-              :harga="kos.harga"
-              :desc="kos.desc"
-              :kosId="kos.id"
-              v-bind:key="kos.id"
-            ></KosCard>
-          </div>
-        </SplideSlide>
-      </Splide>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <Suspense>
+          <KosCard
+            v-for="kos in store.rekomendasiKos"
+            :imgURL="kos.img"
+            :type="kos.type"
+            :rating="kos.rating"
+            :name="kos.name"
+            :kec="kos.kec"
+            :harga="kos.harga"
+            :desc="kos.desc"
+            :kosId="kos.id"
+            v-bind:key="kos.id"
+          ></KosCard>
+          <template #fallback>
+            <p>Loading...</p>
+          </template>
+        </Suspense>
+      </div>
     </section>
 
     <hr class="w-full border-b-2 border-secondary-color" />
@@ -118,21 +101,21 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
+
 import NavigationBar from "@/components/NavigationBar.vue";
-import HeaderHome from "@/components/HeaderHome.vue";
-import KosCard from "@/components/Kos/KosCard.vue";
-import AreaSection from "@/components/AreaSection.vue";
-import CampusSection from "@/components/CampusSection.vue";
-import CallToActionSection from "@/components/CallToActionSection.vue";
-import WhyChooseUsSection from "@/components/WhyChooseUsSection.vue";
+import HeaderHome from "@/components/Home/HeaderHome.vue";
+import AreaSection from "@/components/Home/AreaSection.vue";
+import CampusSection from "@/components/Home/CampusSection.vue";
+import CallToActionSection from "@/components/Home/CallToActionSection.vue";
+import WhyChooseUsSection from "@/components/Home/WhyChooseUsSection.vue";
 import Footer from "@/components/Footer.vue";
 import ModalLogin from "@/components/ModalLogin.vue";
-import Breedcrumb from "@/components/Breedcrumb.vue";
-
 import store from "@/store/store";
 
-import { Splide, SplideSlide } from "@splidejs/vue-splide";
-import "@splidejs/vue-splide/css";
+const KosCard = defineAsyncComponent(() =>
+  import("@/components/Kos/KosCard.vue")
+);
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -146,15 +129,11 @@ export default {
     CallToActionSection,
     WhyChooseUsSection,
     Footer,
-    Splide,
-    SplideSlide,
     ModalLogin,
-    Breedcrumb,
   },
   data() {
     return {
       store,
-      crumbs: [{ name: "Home", url: "/" }],
     };
   },
 };

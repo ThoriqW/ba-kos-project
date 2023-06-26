@@ -1,7 +1,6 @@
 <template>
   <div
     class="header-home bg-[url('../assets/image/image-header.webp')] bg-cover bg-center"
-    loading="lazy"
   >
     <div class="bg-black-color/70 bg-no-repeat py-16">
       <div class="container max-w-screen-xl mx-auto px-5">

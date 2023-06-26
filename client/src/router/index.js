@@ -1,57 +1,45 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/Home.vue";
-import LoginMitra from "@/views/Mitra/Login.vue";
-import LoginUser from "@/views/User/Login.vue";
-import KosView from "@/views/Kos/KosView.vue";
-import KosInfoView from "@/views/Kos/KosInfoView.vue";
-import UserKosSayaView from "@/views/User/UserKosSayaView.vue";
-import UserBookingView from "@/views/User/UserBookingView.vue";
-import DaftarMitra from "@/views/Mitra/Daftar.vue";
-import DaftarUser from "@/views/User/Daftar.vue";
-import EditProfileView from "@/views/User/EditProfileView.vue";
-import DashboardMitraView from "@/views/Mitra/DashboardMitraView.vue";
-import TambahDataKosView from "@/views/Kos/TambahDataKosView.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("@/views/Home.vue"),
   },
   {
     path: "/login-user",
     name: "LoginUser",
-    component: LoginUser,
+    component: () => import("@/views/User/Login.vue"),
   },
   {
     path: "/login-mitra",
     name: "LoginMitra",
-    component: LoginMitra,
+    component: () => import("@/views/Mitra/Login.vue"),
   },
   {
     path: "/daftar-mitra",
     name: "DaftarMitra",
-    component: DaftarMitra,
+    component: () => import("@/views/Mitra/Daftar.vue"),
   },
   {
     path: "/daftar-user",
     name: "DaftarUser",
-    component: DaftarUser,
+    component: () => import("@/views/User/Daftar.vue"),
   },
   {
     path: "/kos",
     name: "Kos",
-    component: KosView,
+    component: () => import("@/views/Kos/KosView.vue"),
   },
   {
     path: "/kos/:id",
     name: "KosInfoView",
-    component: KosInfoView,
+    component: () => import("@/views/Kos/KosInfoView.vue"),
   },
   {
     path: "/user/kos-saya",
     name: "UserKosSayaView",
-    component: UserKosSayaView,
+    component: () => import("@/views/User/UserKosSayaView.vue"),
     meta: {
       requiresAuth: true,
       roles: ["user"], // Menandakan bahwa halaman ini memerlukan autentikasi
@@ -60,7 +48,7 @@ const routes = [
   {
     path: "/user/booking",
     name: "UserBookingView",
-    component: UserBookingView,
+    component: () => import("@/views/User/UserBookingView.vue"),
     meta: {
       requiresAuth: true,
       roles: ["user"], // Menandakan bahwa halaman ini memerlukan autentikasi
@@ -69,7 +57,7 @@ const routes = [
   {
     path: "/user/edit-profile",
     name: "EditProfileView",
-    component: EditProfileView,
+    component: () => import("@/views/User/EditProfileView.vue"),
     meta: {
       requiresAuth: true,
       roles: ["user"], // Menandakan bahwa halaman ini memerlukan autentikasi
@@ -78,16 +66,7 @@ const routes = [
   {
     path: "/mitra/dashboard",
     name: "DashboardMitraView",
-    component: DashboardMitraView,
-    meta: {
-      requiresAuth: true,
-      roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi
-    },
-  },
-  {
-    path: "/mitra/dashboard",
-    name: "DashboardMitraView",
-    component: DashboardMitraView,
+    component: () => import("@/views/Mitra/DashboardMitraView.vue"),
     meta: {
       requiresAuth: true,
       roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi
@@ -96,7 +75,7 @@ const routes = [
   {
     path: "/mitra/dashboard/tambah-kos/step/:id",
     name: "TambahDataKosView",
-    component: TambahDataKosView,
+    component: () => import("@/views/Kos/TambahDataKosView.vue"),
     meta: {
       requiresAuth: true,
       roles: ["mitra"], // Menandakan bahwa halaman ini memerlukan autentikasi
